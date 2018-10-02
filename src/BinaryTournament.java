@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.Random;
 
 public class BinaryTournament
 {
@@ -9,11 +8,10 @@ public class BinaryTournament
     {
         if (solutions.length == 1)
             return solutions[0];
-        Random rn = new Random();
-        int id1 = rn.nextInt(solutions.length);
+        int id1 = RandomGenerator.getRandomInteger(0, solutions.length - 1);
         int id2;
         do
-            id2 = rn.nextInt(solutions.length);
+            id2 = RandomGenerator.getRandomInteger(0, solutions.length - 1);
         while(id2 == id1);
         return comparator.compare(solutions[id1], solutions[id2]) == 1? solutions[id1] : solutions[id2];
     }

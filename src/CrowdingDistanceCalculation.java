@@ -16,7 +16,7 @@ public class CrowdingDistanceCalculation
 
         public int compare(Solution s1, Solution s2)
         {
-            return Double.compare(s1.getGene(objective), s2.getGene(objective));
+            return Double.compare(s1.getObjective(objective), s2.getObjective(objective));
         }
     };
 

@@ -2,15 +2,13 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 
 public class Demo
 {
-    private static final int POPULATION_SIZE = 150;
-    private static final int MAX_GENERATION = 30000;
+    private static final int GENE_LENGTH = 3;
+    private static final int POPULATION_SIZE = 250;
+    private static final int MAX_GENERATION = 100000;
     private static final double MUTATION_RATE = .3;
-
-    private static final Random RANDOM_GENERATOR = new Random();
 
     private static Solution[] population = new Solution[POPULATION_SIZE];
     private static Solution[] offspringPopulation = new Solution[POPULATION_SIZE];
@@ -21,9 +19,9 @@ public class Demo
     {
         for(int i = 0; i < POPULATION_SIZE; i ++)
         {
-            double[] gene = new double[3];
+            double[] gene = new double[GENE_LENGTH];
             for(int j = 0; j < gene.length; j ++)
-                gene[j] = RANDOM_GENERATOR.nextDouble();
+                gene[j] = RandomGenerator.getRandomDouble(Solution.VARIABLE_BOUND_LOW, Solution.VARIABLE_BOUND_HIGH);
             population[i] = new Solution(gene);
         }
     }
@@ -35,7 +33,7 @@ public class Demo
             Solution parent1 = BinaryTournament.execute(population);
             Solution parent2 = BinaryTournament.execute(population);
             Solution offspring = Solution.crossover(parent1, parent2);
-            if (RANDOM_GENERATOR.nextDouble() <= MUTATION_RATE)
+            if (RandomGenerator.getRandomDouble(0, 1) <= MUTATION_RATE)
                 offspring = Solution.mutate(offspring);
             offspringPopulation[i] = offspring;
         }
@@ -63,6 +61,7 @@ public class Demo
         while(generationCount < MAX_GENERATION)
         {
             generationCount ++;
+            System.out.print("Generation " + generationCount + ":\n");
             reproduce();
             selection();
         }

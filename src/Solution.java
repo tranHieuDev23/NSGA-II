@@ -1,31 +1,27 @@
-import java.util.Random;
-
 public class Solution
 {
     private static final double BLX_ALPHA_PARAMETER = .5;
-    private static final double VARIABLE_BOUND_LOW = 0;
-    private static final double VARIABLE_BOUND_HIGH = 0;
-
-    private static final Random RANDOM_GENERATOR = new Random();
+    public static final double VARIABLE_BOUND_LOW = 0;
+    public static final double VARIABLE_BOUND_HIGH = 1;
 
     private static Function gFunction = new Function() {
         public double calculate(Solution solution) {
             double sum = 0;
-            for(int i = 1; i < solution.gene.length - 1; i ++)
-                sum += solution.gene[i];
-            return 1.0 + sum / (solution.gene.length - 1);
+            for(int i = 1; i < solution.getGeneLength(); i ++)
+                sum += solution.getGene(i);
+            return 1.0 + 9 * (sum / (solution.getGeneLength() - 1));
         }
     };
     private static Function[] objectiveFunctions = new Function[]{
         new Function() {
             public double calculate(Solution solution) {
-                return solution.gene[0];
+                return solution.getGene(0);
             }
         },
         new Function() {
             public double calculate(Solution solution) {
                 double g = gFunction.calculate(solution);
-                return g * (1 - Math.sqrt(solution.gene[0] / g));
+                return g * (1 - (solution.getGene(0) / g) * (solution.getGene(0) / g));
             }
         }
     };
@@ -93,11 +89,6 @@ public class Solution
         return result;
     }
 
-    private static double getRandomDouble(double low, double high)
-    {
-        return RANDOM_GENERATOR.nextDouble() * (high - low) + low;
-    }
-
     public static Solution crossover(Solution parent1, Solution parent2) 
     {
         double[] newGene = new double[parent1.gene.length];
@@ -112,7 +103,7 @@ public class Solution
                 Double.max(parent1.gene[i], parent2.gene[i]) + BLX_ALPHA_PARAMETER * d,
                 VARIABLE_BOUND_HIGH
             );
-            newGene[i] = getRandomDouble(low, high);
+            newGene[i] = RandomGenerator.getRandomDouble(low, high);
         }
         return new Solution(newGene);
     }
@@ -120,9 +111,8 @@ public class Solution
     public static Solution mutate(Solution solution)
     {
         Solution mutatedSolution = new Solution(solution);
-        Random rn = new Random();
-        int mutationPoint = rn.nextInt(solution.gene.length);
-        mutatedSolution.setGene(mutationPoint, getRandomDouble(VARIABLE_BOUND_LOW, VARIABLE_BOUND_HIGH));
+        int mutationPoint = RandomGenerator.getRandomInteger(0, mutatedSolution.gene.length - 1);
+        mutatedSolution.gene[mutationPoint] = RandomGenerator.getRandomDouble(VARIABLE_BOUND_LOW, VARIABLE_BOUND_HIGH);
         return mutatedSolution;
     }
 }
