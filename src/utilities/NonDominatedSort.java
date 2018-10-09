@@ -19,15 +19,16 @@ public class NonDominatedSort {
         {
             dominating[i] = new LinkedList<>();
             for(int j = 0; j < n; j ++)
+            if (solutions.get(i).dominate(solutions.get(j)))
             {
-                if (solutions.get(i).dominate(solutions.get(j)))
-                    dominating[i].add(j);
-                if (solutions.get(j).dominate(solutions.get(i)))
-                    dominatedCount[i] ++;
+                dominating[i].add(j);
+                dominatedCount[j] ++;
             }
-            if (dominatedCount[i] == 0)
-                firstRankQueue.add(i);
         }
+        
+        for(int i = 0; i < n; i ++)
+        if (dominatedCount[i] == 0)
+            firstRankQueue.add(i);
 
         int round = 0;
         while(!firstRankQueue.isEmpty())

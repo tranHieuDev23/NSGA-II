@@ -29,7 +29,7 @@ public class ZDT1<S extends DoubleSolution<S>> implements Problem<S>
             public double calculate(S solution) {
                 double g = G_FUNCTION.calculate(solution);
                 double x1 = solution.getGene(0);
-                return g + (1 - Math.sqrt(x1 / g));
+                return g * (1 - Math.sqrt(x1 / g));
             }
         }
     };

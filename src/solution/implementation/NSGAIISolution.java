@@ -82,9 +82,9 @@ public class NSGAIISolution implements DoubleSolution<NSGAIISolution>
         boolean result = false;
         for(int position = 0; position < objectives.length; position ++)
         {
-            if (objectives[position] > target.objectives[position])
-                result = true;
             if (objectives[position] < target.objectives[position])
+                result = true;
+            if (objectives[position] > target.objectives[position])
                 return false;
         }
         return result;
