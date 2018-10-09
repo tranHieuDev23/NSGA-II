@@ -9,5 +9,5 @@ public interface Problem<S extends Solution>
     int getNumberOfConstraints();
 
     void evaluate(S solution);
-    S createRandomSolution();
+    S createRandomSolution(S result);
 }

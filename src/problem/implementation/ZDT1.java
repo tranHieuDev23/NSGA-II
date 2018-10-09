@@ -58,15 +58,14 @@ public class ZDT1<S extends DoubleSolution<S>> implements Problem<S>
             solution.setObjective(i, OBJECTIVE_FUNCTIONS[i].calculate(solution));
     }
     
-    public S createRandomSolution()
+    public S createRandomSolution(S solution)
     {
-        S result = new S();
-        result.setGeneLength(getNumberOfVariables());
-        result.setObjectivesCount(getNumberOfObjectives());
-        result.setConstraintsCount(getNumberOfConstraints());
+        solution.setGeneLength(getNumberOfVariables());
+        solution.setObjectivesCount(getNumberOfObjectives());
+        solution.setConstraintsCount(getNumberOfConstraints());
         for(int i = 0; i < getNumberOfVariables(); i ++)
-            result.setGene(i, RandomGenerator.getRandomDouble(VARIABLE_BOUNDS_LOW[i], VARIABLE_BOUNDS_HIGH[i]));
-        evaluate(result);
-        return result;
+            solution.setGene(i, RandomGenerator.getRandomDouble(VARIABLE_BOUNDS_LOW[i], VARIABLE_BOUNDS_HIGH[i]));
+        evaluate(solution);
+        return solution;
     }
 }

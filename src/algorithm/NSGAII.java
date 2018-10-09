@@ -63,7 +63,7 @@ public class NSGAII
         // Initialize population
         ArrayList<NSGAIISolution> population = new ArrayList<>();
         for (int i = 0; i < maxPopulationSize; i ++)
-            population.add(problem.createRandomSolution());
+            population.add(problem.createRandomSolution(new NSGAIISolution()));
 
         for(int generation = 1; generation <= numberOfGeneration; generation ++)
         {
@@ -82,8 +82,11 @@ public class NSGAII
                     parents.add(selectionOperator.execute(population));
                 ArrayList<NSGAIISolution> offsprings = crossoverOperator.execute(parents);
                 for (NSGAIISolution solution : offsprings)
+                {
                     if (RandomGenerator.getRandomDouble(0, 1) <= mutationRate)
                         solution = mutationOperator.execute(solution);
+                    problem.evaluate(solution);
+                }
                 offspringPopulation.addAll(offsprings);
             }
 
