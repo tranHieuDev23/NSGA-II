@@ -18,7 +18,7 @@ public class ZDT1<S extends DoubleSolution<S>> implements Problem<S>
         }
     };
 
-    private final Function[] OBJECTIVE_FUNCTIONS = new Function[]
+    private final Function<S>[] OBJECTIVE_FUNCTIONS = new Function[]
     {
         new Function<S>() {
             public double calculate(S solution) {
@@ -54,7 +54,12 @@ public class ZDT1<S extends DoubleSolution<S>> implements Problem<S>
 
     public void evaluate(S solution)
     {
-        for(int i = 0; i < getNumberOfObjectives() - 1; i ++)
+        for (int i = 0; i < getNumberOfVariables(); i ++)
+        {
+            double x = solution.getGene(i);
+            solution.setGene(i, Double.max(ZDT1.VARIABLE_BOUNDS_LOW[i], Double.min(ZDT1.VARIABLE_BOUNDS_HIGH[i], x)));
+        }
+        for(int i = 0; i < getNumberOfObjectives(); i ++)
             solution.setObjective(i, OBJECTIVE_FUNCTIONS[i].calculate(solution));
     }
     

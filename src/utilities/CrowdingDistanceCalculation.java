@@ -28,6 +28,9 @@ public class CrowdingDistanceCalculation
 
     public static void execute(ArrayList<NSGAIISolution> solutions)
     {
+        for(NSGAIISolution s : solutions)
+            s.crowdingDistance = 0;
+
         int n = solutions.size();
         int objectiveCount = solutions.get(0).getObjectivesCount();
         

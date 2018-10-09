@@ -68,10 +68,6 @@ public class NSGAII
         for(int generation = 1; generation <= numberOfGeneration; generation ++)
         {
             System.out.println("Generation " + generation + "/" + numberOfGeneration);
-
-            // Preparation
-            NonDominatedSort.execute(population);
-            CrowdingDistanceCalculation.execute(population);
             
             // Reproduce
             ArrayList<NSGAIISolution> offspringPopulation = new ArrayList<>();
@@ -81,11 +77,13 @@ public class NSGAII
                 for (int j = 0; j < crossoverOperator.getNumberOfRequiredParents(); j ++)
                     parents.add(selectionOperator.execute(population));
                 ArrayList<NSGAIISolution> offsprings = crossoverOperator.execute(parents);
-                for (NSGAIISolution solution : offsprings)
+                for (int i = 0; i < offsprings.size(); i ++)
                 {
+                    NSGAIISolution s = offsprings.get(i);
                     if (RandomGenerator.getRandomDouble(0, 1) <= mutationRate)
-                        solution = mutationOperator.execute(solution);
-                    problem.evaluate(solution);
+                        s = mutationOperator.execute(s);
+                    problem.evaluate(s);
+                    offsprings.set(i, s);
                 }
                 offspringPopulation.addAll(offsprings);
             }
@@ -94,6 +92,8 @@ public class NSGAII
             ArrayList<NSGAIISolution> combinedPopulation = new ArrayList<>();
             combinedPopulation.addAll(population);
             combinedPopulation.addAll(offspringPopulation);
+            NonDominatedSort.execute(combinedPopulation);
+            CrowdingDistanceCalculation.execute(combinedPopulation);
             population = generationSelection.execute(combinedPopulation);
         }
 

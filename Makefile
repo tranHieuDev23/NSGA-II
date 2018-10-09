@@ -5,7 +5,7 @@ TARGET = ./target
 JVM = java
 
 all:
-	$(COMPILER) $(SOURCE)/$(SOURCE_FILE) -cp $(SOURCE) -d $(TARGET)
+	$(COMPILER) $(SOURCE)/$(SOURCE_FILE) -cp $(SOURCE) -d $(TARGET) -Xlint:unchecked
 
 run:
 	$(JVM) -cp $(TARGET) Runner

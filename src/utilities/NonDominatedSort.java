@@ -3,13 +3,12 @@ package utilities;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 import solution.implementation.NSGAIISolution;
 
 public class NonDominatedSort {
-    public static void execute(List<NSGAIISolution> solutions)
+    public static void execute(ArrayList<NSGAIISolution> solutions)
     {
         int n = solutions.size();
         Queue<Integer> firstRankQueue = new LinkedList<>();
@@ -38,7 +37,7 @@ public class NonDominatedSort {
             for(int i = 0; i < siz; i ++)
             {
                 int id = firstRankQueue.poll();
-                solutions.get(i).rank = round;
+                solutions.get(id).rank = round;
                 while(!dominating[id].isEmpty())
                 {
                     int dominatedId = dominating[id].poll();
