@@ -1,6 +1,5 @@
 public class Solution
 {
-    private static final double BLX_ALPHA_PARAMETER = .5;
     public static final double VARIABLE_BOUND_LOW = 0;
     public static final double VARIABLE_BOUND_HIGH = 1;
 
