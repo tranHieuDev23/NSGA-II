@@ -2,4 +2,4 @@ package operator;
 
 import java.util.List;
 
-public interface SelectionOperator<S extends Solution> extends Operator<List<S>, List<S>> {}
+public interface SelectionOperator<Input, Output> extends Operator<Input, Output> {}

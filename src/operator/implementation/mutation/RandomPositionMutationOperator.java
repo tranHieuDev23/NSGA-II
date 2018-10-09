@@ -3,6 +3,7 @@ package operator.implementation.mutation;
 import operator.MutationOperator;
 import solution.DoubleSolution;
 import solution.Solution;
+import utilities.RandomGenerator;
 
 public class RandomPositionMutationOperator<S extends DoubleSolution<S>> implements MutationOperator<S>
 {
