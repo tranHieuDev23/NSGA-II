@@ -1,8 +1,10 @@
 package operator;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public interface CrossoverOperator<S extends Solution> extends Operator<List<S>, List<S>> 
+import solution.Solution;
+
+public interface CrossoverOperator<S extends Solution> extends Operator<ArrayList<S>, ArrayList<S>> 
 {
     int getNumberOfRequiredParents();
     int getNumberOfGeneratedOffsprings();

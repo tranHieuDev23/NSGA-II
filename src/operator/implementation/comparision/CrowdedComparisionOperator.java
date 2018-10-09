@@ -1,4 +1,4 @@
-package comparator.implementation.comparision;
+package operator.implementation.comparision;
 
 import java.util.Comparator;
 import solution.implementation.NSGAIISolution;

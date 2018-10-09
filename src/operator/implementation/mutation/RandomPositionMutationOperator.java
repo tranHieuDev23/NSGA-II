@@ -16,9 +16,9 @@ public class RandomPositionMutationOperator<S extends DoubleSolution<S>> impleme
         this.VARIABLE_BOUND_HIGH = VARIABLE_BOUND_HIGH;
     }
 
-    S execute(S solution)
+    public S execute(S solution)
     {
-        Solution<Solution<S>,Number> mutatedSolution = solution.copy();
+        S mutatedSolution = solution.copy();
         int mutationPoint = RandomGenerator.getRandomInteger(0, mutatedSolution.getGeneLength() - 1);
         mutatedSolution.setGene(mutationPoint, RandomGenerator.getRandomDouble(VARIABLE_BOUND_LOW, VARIABLE_BOUND_HIGH));
         return mutatedSolution;

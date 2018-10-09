@@ -1,7 +1,5 @@
 package solution.implementation;
 
-import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAII;
-
 import solution.DoubleSolution;
 
 public class NSGAIISolution implements DoubleSolution<NSGAIISolution>
@@ -9,6 +7,8 @@ public class NSGAIISolution implements DoubleSolution<NSGAIISolution>
     private double[] gene, objectives, constraints;
     public int rank;
     public double crowdingDistance;
+
+    public NSGAIISolution() {}
 
     public NSGAIISolution(int geneLength, int objectivesCount, int constraintsCount)
     {

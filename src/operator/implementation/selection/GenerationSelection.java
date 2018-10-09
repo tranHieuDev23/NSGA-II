@@ -1,9 +1,12 @@
 package operator.implementation.selection;
 
 import java.util.Comparator;
-import java.util.List;
+import java.util.ArrayList;
 
-public class GenerationSelection<S extends Solution> implements SelectionOperator<List<S>, List<S>>
+import operator.SelectionOperator;
+import solution.Solution;
+
+public class GenerationSelection<S extends Solution> implements SelectionOperator<ArrayList<S>, ArrayList<S>>
 {
     private final Comparator<S> comparator;
     private final int maxPopulationSize;
@@ -14,7 +17,7 @@ public class GenerationSelection<S extends Solution> implements SelectionOperato
         this.maxPopulationSize = maxPopulationSize;
     }
 
-    public List<S> execute(List<S> population)
+    public ArrayList<S> execute(ArrayList<S> population)
     {
         population.sort(comparator);
         while(population.size() > maxPopulationSize)

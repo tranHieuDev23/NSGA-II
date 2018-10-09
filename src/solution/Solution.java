@@ -1,6 +1,6 @@
 package solution;
 
-public interface Solution<S extends Solution<S>, N extends Number>
+public interface Solution<S extends Solution<S, N>, N>
 {
     int getGeneLength();
     void setGeneLength(int length);

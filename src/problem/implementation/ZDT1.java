@@ -5,16 +5,16 @@ import solution.DoubleSolution;
 import utilities.Function;
 import utilities.RandomGenerator;
 
-public class ZDT1<S extends DoubleSolution> implements Problem<S>
+public class ZDT1<S extends DoubleSolution<S>> implements Problem<S>
 {
     private final Function<S> G_FUNCTION = new Function<>()
     {
         public double calculate(S solution)
         {
             double result = 0;
-            for(int i = 1; i < s.getGeneLength(); i ++)
-                result += s.getGene(i);
-            return 1 + result * 9 / (s.getGeneLength() - 1);
+            for(int i = 1; i < solution.getGeneLength(); i ++)
+                result += (double) solution.getGene(i);
+            return 1 + result * 9 / (solution.getGeneLength() - 1);
         }
     };
 
@@ -60,7 +60,10 @@ public class ZDT1<S extends DoubleSolution> implements Problem<S>
     
     public S createRandomSolution()
     {
-        S result = new S(getNumberOfVariables(), getNumberOfObjectives(), getNumberOfConstraints());
+        S result = new S();
+        result.setGeneLength(getNumberOfVariables());
+        result.setObjectivesCount(getNumberOfObjectives());
+        result.setConstraintsCount(getNumberOfConstraints());
         for(int i = 0; i < getNumberOfVariables(); i ++)
             result.setGene(i, RandomGenerator.getRandomDouble(VARIABLE_BOUNDS_LOW[i], VARIABLE_BOUNDS_HIGH[i]));
         evaluate(result);

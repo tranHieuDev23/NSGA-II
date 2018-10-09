@@ -10,14 +10,14 @@ public class BLXCrossoverOperator<S extends DoubleSolution<S>> implements Crosso
 {
     private static final double BLX_ALPHA_PARAMETER = .5;
 
-    public List<S> execute(List<S> parents)
+    public ArrayList<S> execute(ArrayList<S> parents)
     {
-        S offspring = new S();
-        for(int i = 0; i < newGene.length; i ++)
+        S offspring = parents.get(0).copy();
+        for(int i = 0; i < offspring.getGeneLength(); i ++)
         {
-            double d = Math.abs(parents.get(0).gene[i] - parents.get(1).gene[i]);
-            double low = Double.min(parents.get(0).gene[i], parents.get(1).gene[i]) - BLXCrossoverOperator.BLX_ALPHA_PARAMETER * d;
-            double high = Double.max(parents.get(0).gene[i], parents.get(1).gene[i]) + BLXCrossoverOperator.BLX_ALPHA_PARAMETER * d;
+            double d = Math.abs(parents.get(0).getGene(i) - parents.get(1).getGene(i));
+            double low = Double.min(parents.get(0).getGene(i), parents.get(1).getGene(i)) - BLXCrossoverOperator.BLX_ALPHA_PARAMETER * d;
+            double high = Double.max(parents.get(0).getGene(i), parents.get(1).getGene(i)) + BLXCrossoverOperator.BLX_ALPHA_PARAMETER * d;
             offspring.setGene(i, RandomGenerator.getRandomDouble(low, high));
         }
         ArrayList<S> result = new ArrayList<>();
@@ -25,7 +25,7 @@ public class BLXCrossoverOperator<S extends DoubleSolution<S>> implements Crosso
         return result;
     }
 
-    public int getNumerOfRequiredParents()
+    public int getNumberOfRequiredParents()
     {
         return 2;
     }

@@ -2,7 +2,7 @@ package algorithm;
 
 import java.util.ArrayList;
 
-import comparator.implementation.comparision.CrowdedComparisionOperator;
+import operator.implementation.comparision.CrowdedComparisionOperator;
 import operator.CrossoverOperator;
 import operator.MutationOperator;
 import operator.SelectionOperator;
@@ -22,10 +22,10 @@ public class NSGAII
     private static final CrowdedComparisionOperator ccomparator = new CrowdedComparisionOperator();
     private final GenerationSelection<NSGAIISolution> generationSelection;
 
-    private final Problem<NSGAIISolution> problem;
-    private final SelectionOperator<List<NSGAIISolution>, NSGAIISolution> selectionOperator;
-    private final CrossoverOperator<NSGAIISolution> crossoverOperator;
-    private final MutationOperator<NSGAIISolution> mutationOperator;
+    private Problem<NSGAIISolution> problem;
+    private SelectionOperator<ArrayList<NSGAIISolution>, NSGAIISolution> selectionOperator;
+    private CrossoverOperator<NSGAIISolution> crossoverOperator;
+    private MutationOperator<NSGAIISolution> mutationOperator;
     private int maxPopulationSize, numberOfGeneration;
     private double mutationRate;
 
@@ -43,7 +43,7 @@ public class NSGAII
         this.mutationOperator = new RandomPositionMutationOperator<>(0, 1);
     }
 
-    public void setSelectionOperator(SelectionOperator<List<NSGAIISolution>, NSGAIISolution> selectionOperator)
+    public void setSelectionOperator(SelectionOperator<ArrayList<NSGAIISolution>, NSGAIISolution> selectionOperator)
     {
         this.selectionOperator = selectionOperator;
     }
@@ -58,7 +58,7 @@ public class NSGAII
         this.mutationOperator = mutationOperator;
     }
 
-    public List<NSGAIISolution> execute()
+    public ArrayList<NSGAIISolution> execute()
     {
         // Initialize population
         ArrayList<NSGAIISolution> population = new ArrayList<>();
