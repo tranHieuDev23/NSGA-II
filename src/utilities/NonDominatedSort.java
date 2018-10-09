@@ -9,9 +9,9 @@ import java.util.Queue;
 import solution.implementation.NSGAIISolution;
 
 public class NonDominatedSort {
-    public static void execute(NSGAIISolution[] solutions)
+    public static void execute(List<NSGAIISolution> solutions)
     {
-        int n = solutions.length;
+        int n = solutions.size();
         Queue<Integer> firstRankQueue = new LinkedList<>();
         Queue<Integer>[] dominating = new Queue[n];
         int[] dominatedCount = new int[n];
@@ -21,9 +21,9 @@ public class NonDominatedSort {
             dominating[i] = new LinkedList<>();
             for(int j = 0; j < n; j ++)
             {
-                if (solutions[i].dominate(solutions[j]))
+                if (solutions.get(i).dominate(solutions.get(j)))
                     dominating[i].add(j);
-                if (solutions[j].dominate(solutions[i]))
+                if (solutions.get(j).dominate(solutions.get(i)))
                     dominatedCount[i] ++;
             }
             if (dominatedCount[i] == 0)
@@ -38,7 +38,7 @@ public class NonDominatedSort {
             for(int i = 0; i < siz; i ++)
             {
                 int id = firstRankQueue.poll();
-                solutions[id].rank = round;
+                solutions.get(i).rank = round;
                 while(!dominating[id].isEmpty())
                 {
                     int dominatedId = dominating[id].poll();

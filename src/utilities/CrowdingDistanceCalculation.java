@@ -26,20 +26,20 @@ public class CrowdingDistanceCalculation
 
     private static ObjectiveComparator comparator = new ObjectiveComparator();
 
-    public static void calculate(List<NSGAIISolution> solutions)
+    public static void execute(List<NSGAIISolution> solutions)
     {
         int n = solutions.length;
-        int objectiveCount = solutions[0].getObjectiveCount();
+        int objectiveCount = solutions.get(0).getObjectiveCount();
         
         for(int o = 0; o < objectiveCount; o ++)
         {
             comparator.setObjective(o);
-            Arrays.sort(solutions, comparator);
-            solutions[0].crowdingDistance = solutions[n - 1].crowdingDistance = Double.POSITIVE_INFINITY;
-            double fMin = solutions[0].getObjective(o);
-            double fMax = solutions[n - 1].getObjective(o);
+            solutions.sort(comparator);
+            solutions.get(0).crowdingDistance = solutions.get(n - 1).crowdingDistance = Double.POSITIVE_INFINITY;
+            double fMin = solutions.get(0).getObjective(o);
+            double fMax = solutions.get(n - 1).getObjective(o);
             for (int i = 1; i < solutions.length - 1; i ++)
-                solutions[i].crowdingDistance += (solutions[i + 1].getObjective(o) - solutions[i - 1].getObjective(o)) / (fMax - fMin);
+                solutions.get(i).crowdingDistance += (solutions.get(i + 1).getObjective(o) - solutions.get(i - 1).getObjective(o)) / (fMax - fMin);
         }
     }
 }
