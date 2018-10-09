@@ -8,7 +8,7 @@ import problem.implementation.ZDT1;
 public class Runner
 {
     public static void main(String[] args) {
-        NSGAII nsgaii = new NSGAII(new ZDT1<>(), 100, 1000, 0.2);
+        NSGAII nsgaii = new NSGAII(new ZDT1<>(), 250, 1000, 0.2);
         ArrayList<NSGAIISolution> result = nsgaii.execute();
         try {
             FileWriter variableWriter = new FileWriter("VAR.CSV");
