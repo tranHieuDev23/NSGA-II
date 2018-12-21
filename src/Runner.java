@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import algorithm.NSGAII;
 import operator.implementation.mutation.RandomPositionMutationOperator;
 import solution.implementation.NSGAIISolution;
+import utilities.RealtimePlotter;
 import problem.implementation.ZDT3;
 
 public class Runner
 {
     public static void main(String[] args) {
-        NSGAII nsgaii = new NSGAII(new ZDT3<>(), 100, 20, 0.2);
+        NSGAII nsgaii = new NSGAII(new ZDT3<>(), 500, 300, 0.2, new RealtimePlotter("NSGA-II"));
         nsgaii.setMutationOperator(new RandomPositionMutationOperator<>(-1e3, 1e3));
         ArrayList<NSGAIISolution> result = nsgaii.execute();
         try {

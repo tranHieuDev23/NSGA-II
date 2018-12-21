@@ -1,6 +1,7 @@
 package algorithm;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import operator.implementation.comparision.CrowdedComparisionOperator;
 import operator.CrossoverOperator;
@@ -15,11 +16,13 @@ import solution.implementation.NSGAIISolution;
 import utilities.CrowdingDistanceCalculation;
 import utilities.NonDominatedSort;
 import utilities.RandomGenerator;
+import utilities.RealtimePlotter;
 
 public class NSGAII
 {
     private static final CrowdedComparisionOperator ccomparator = new CrowdedComparisionOperator();
     private final GenerationSelection<NSGAIISolution> generationSelection;
+    private final RealtimePlotter plotter;
 
     private Problem<NSGAIISolution> problem;
     private SelectionOperator<ArrayList<NSGAIISolution>, NSGAIISolution> selectionOperator;
@@ -28,13 +31,14 @@ public class NSGAII
     private int maxPopulationSize, numberOfGeneration;
     private double mutationRate;
 
-    public NSGAII(Problem<NSGAIISolution> problem, int maxPopulationSize, int numberOfGeneration, double mutationRate)
+    public NSGAII(Problem<NSGAIISolution> problem, int maxPopulationSize, int numberOfGeneration, double mutationRate, RealtimePlotter plotter)
     {
         this.problem = problem;
         this.maxPopulationSize = maxPopulationSize;
         this.numberOfGeneration = numberOfGeneration;
         this.mutationRate = mutationRate;
         this.generationSelection = new GenerationSelection<>(NSGAII.ccomparator, maxPopulationSize);
+        this.plotter = plotter;
 
         // Default operators
         this.selectionOperator = new BinaryTournamentSelectionOperator<>(NSGAII.ccomparator);
@@ -94,6 +98,21 @@ public class NSGAII
             NonDominatedSort.execute(combinedPopulation);
             CrowdingDistanceCalculation.execute(combinedPopulation);
             population = generationSelection.execute(combinedPopulation);
+
+            // Plotting
+            if (plotter != null) {
+                double[] xData = new double[population.size()];
+                double[] yData = new double[population.size()];
+                for(int i = 0; i < population.size(); i ++) {
+                    xData[i] = population.get(i).getObjective(0);
+                    yData[i] = population.get(i).getObjective(1);
+                }
+                plotter.updateData(xData, yData);
+                
+                int delay = 200; // number of milliseconds to sleep
+                long start = System.currentTimeMillis();
+                while(start >= System.currentTimeMillis() - delay); // do nothing
+            }
         }
 
         return population;
