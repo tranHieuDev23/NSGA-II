@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import operator.SelectionOperator;
 import solution.Solution;
 
+@SuppressWarnings("rawtypes")
 public class GenerationSelection<S extends Solution> implements SelectionOperator<ArrayList<S>, ArrayList<S>>
 {
     private final Comparator<S> comparator;

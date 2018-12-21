@@ -1,7 +1,6 @@
 package utilities;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -12,6 +11,7 @@ public class NonDominatedSort {
     {
         int n = solutions.size();
         Queue<Integer> firstRankQueue = new LinkedList<>();
+        @SuppressWarnings("unchecked")
         Queue<Integer>[] dominating = new Queue[n];
         int[] dominatedCount = new int[n];
 

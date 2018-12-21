@@ -2,6 +2,7 @@ package problem;
 
 import solution.Solution;
 
+@SuppressWarnings("rawtypes")
 public interface Problem<S extends Solution>
 {
     int getNumberOfVariables();

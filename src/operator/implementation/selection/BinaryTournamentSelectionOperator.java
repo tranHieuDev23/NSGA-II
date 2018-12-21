@@ -7,6 +7,7 @@ import operator.SelectionOperator;
 import solution.Solution;
 import utilities.RandomGenerator;
 
+@SuppressWarnings("rawtypes")
 public class BinaryTournamentSelectionOperator<S extends Solution> implements SelectionOperator<ArrayList<S>, S>
 {
     private final Comparator<S> comparator;

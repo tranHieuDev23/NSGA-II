@@ -11,7 +11,6 @@ import operator.implementation.mutation.RandomPositionMutationOperator;
 import operator.implementation.selection.BinaryTournamentSelectionOperator;
 import operator.implementation.selection.GenerationSelection;
 import problem.Problem;
-import solution.Solution;
 import solution.implementation.NSGAIISolution;
 import utilities.CrowdingDistanceCalculation;
 import utilities.NonDominatedSort;

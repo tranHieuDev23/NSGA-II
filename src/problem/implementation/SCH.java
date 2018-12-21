@@ -10,6 +10,7 @@ public class SCH<S extends DoubleSolution<S>> implements Problem<S>
     private static final double VARIABLE_BOUND_LOW = -1e3;
     private static final double VARIABLE_BOUND_HIGH = 1e3;
 
+    @SuppressWarnings("unchecked")
     private final Function<S>[] OBJECTIVE_FUNCTIONS = new Function[]
     {
         new Function<S>()

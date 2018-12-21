@@ -18,6 +18,7 @@ public class ZDT2<S extends DoubleSolution<S>> implements Problem<S>
         }
     };
 
+    @SuppressWarnings("unchecked")
     private final Function<S>[] OBJECTIVE_FUNCTIONS = new Function[]
     {
         new Function<S>() {
