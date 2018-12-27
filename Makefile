@@ -8,4 +8,4 @@ all:
 	$(COMPILER) $(SOURCE)/$(SOURCE_FILE) -cp $(SOURCE)  -d $(TARGET) -Xlint:unchecked
 
 run:
-	$(JVM) -cp $(TARGET) Runner
+	$(JVM) -cp $(TARGET) Runner & $(JVM) -cp $(TARGET) Runner

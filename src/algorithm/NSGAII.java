@@ -1,7 +1,6 @@
 package algorithm;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import operator.implementation.comparision.CrowdedComparisionOperator;
 import operator.CrossoverOperator;
@@ -109,7 +108,7 @@ public class NSGAII
                 }
                 plotter.updateData(xData, yData);
                 
-                int delay = 200; // number of milliseconds to sleep
+                int delay = 1000; // number of milliseconds to sleep
                 long start = System.currentTimeMillis();
                 while(start >= System.currentTimeMillis() - delay); // do nothing
             }
