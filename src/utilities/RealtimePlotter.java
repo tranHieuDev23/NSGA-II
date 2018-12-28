@@ -20,7 +20,7 @@ public class RealtimePlotter {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JFrame frame = new JFrame("XChart");
+                JFrame frame = new JFrame(seriesName);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.add(chartPanel);
 
